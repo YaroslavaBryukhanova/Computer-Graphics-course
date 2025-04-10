@@ -1,11 +1,11 @@
-#include "renderer/rasterizer/rasterizer.h"
+#include "renderer/raytracer/raytracer.h"
 #include "renderer/renderer.h"
 #include "resource.h"
 
 
 namespace cg::renderer
 {
-	class rasterization_renderer : public renderer
+	class ray_tracing_renderer : public renderer
 	{
 	public:
 		virtual void init();
@@ -16,8 +16,10 @@ namespace cg::renderer
 
 	protected:
 		std::shared_ptr<cg::resource<cg::unsigned_color>> render_target;
-		std::shared_ptr<cg::resource<float>> depth_buffer;
 
-		std::shared_ptr<cg::renderer::rasterizer<cg::vertex, cg::unsigned_color>> rasterizer;
+		std::shared_ptr<cg::renderer::raytracer<cg::vertex, cg::unsigned_color>> raytracer;
+		std::shared_ptr<cg::renderer::raytracer<cg::vertex, cg::unsigned_color>> shadow_raytracer;
+
+		std::vector<cg::renderer::light> lights;
 	};
 }// namespace cg::renderer
